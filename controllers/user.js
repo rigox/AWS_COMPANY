@@ -13,3 +13,19 @@ exports.createUser = asyncHandler(async(req,res,next)=>{
 
 
 
+//Deletes a  user by id
+//@Route Delete api/v1/users/{id}
+//@Access Private
+exports.deleteUser  =  asyncHandler(async(req,res,next)=>{
+    // find the user
+    let user  =  User.findOne(req.body.email)
+
+    if(!user){
+
+    }
+
+    await user.remove()
+
+    res.status(200).json({success:true,data:{}})
+});
+
