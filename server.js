@@ -3,6 +3,7 @@ const dotenv =  require("dotenv")
 const colors =  require("colors")
 const cors =  require("cors")
 const morgan  =  require('morgan')
+const errHandler = require("./middleware/error")
 const db =  require("./config/db")
 const app  = express()
 
@@ -29,6 +30,9 @@ app.use(cors())
 //Add routes
 app.use('/api/v1/users',users);
 
+
+//set up error handler
+app.use(errHandler)
 
 if(process.env.ENV === 'development'){
       app.use(morgan('dev'))

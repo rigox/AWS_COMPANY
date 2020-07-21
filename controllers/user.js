@@ -1,6 +1,6 @@
 const User =  require("../models/User")
 const asyncHandler = require("../middleware/async")
-
+const errorResponse =  require("../utils/errorResponse")
 //@Desc  creates a user profile
 //@Route POST /api/v1/users
 //@Access Public
@@ -11,6 +11,23 @@ exports.createUser = asyncHandler(async(req,res,next)=>{
       
     });
 
+
+
+
+//@Desc  gets a user by id
+//@Route get api/user/{id}
+//@Access Public
+exports.getUser = asyncHandler(async(req,res,next)=>{
+      const {id}  =  req.params.id
+
+      const user  =  await User.findById(id)
+
+      if(!user){
+          //error response
+      }
+
+      res.status(200).json({success:true,data:user})
+});
 
 
 //Deletes a  user by id
