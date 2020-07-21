@@ -46,3 +46,32 @@ exports.uploadDocument  =  asynHandler(async(req,res,next)=>{
       });
     
 });
+
+
+//@Desc deletes a file but only the owner can delete it
+//@Route DELETE  /api/v1/docs/{id}
+//@Access  private
+exports.deleteFile =  asynHandler(async(req,res,next)=>{
+       
+     const file =  await Doc.findById(req.params.id);
+
+    //check if file exist 
+     if(!file){
+       return  next(new errorResponse(`Document with the id of ${req.params.id} was not found`,400))
+     }
+
+  //makes sure only the owner can delete the file
+
+   const owner = await  file.isOwner(req.user.id)
+      
+   if(!owner){
+    return  next(new errorResponse('you are not the owner  fo the file',401))
+   }
+
+   //proced to delete file
+
+   let deletedFile =  await file.remove();
+
+   res.status(200).json({success:true,data:deletedFile})
+     
+});

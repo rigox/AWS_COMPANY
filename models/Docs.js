@@ -30,5 +30,13 @@ const docSchema =  new Schema({
 });
 
 
+//makes sures  only the owner can delete the document
+docSchema.methods.isOwner =  async function(id){
+    if(id=== this.owner){
+         return true;
+    }
+     return false;
+}
+
 
 module.exports =  mongoose.model('docs',docSchema)

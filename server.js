@@ -23,6 +23,7 @@ app.use(fileUploader())
 //load routes 
 const users =  require("./routes/user")
 const docs =  require("./routes/docs")
+const auth =   require("./routes/auth")
 //setup middleware
 app.use(express.urlencoded())
 app.use(express.json())
@@ -34,7 +35,7 @@ app.use(cors())
 //Add routes
 app.use('/api/v1/users',users);
 app.use('/api/v1/docs', docs);
-
+app.use('/api/v1/auth',auth)
 //set up error handler
 app.use(errHandler)
 
