@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/rigox/AWS_COMPANY#readme",
   "dependencies": {
+    "aws-sdk": "^2.716.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.24",
     "morgan": "^1.10.0"
