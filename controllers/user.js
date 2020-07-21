@@ -23,7 +23,7 @@ exports.getUser = asyncHandler(async(req,res,next)=>{
       const user  =  await User.findById(id)
 
       if(!user){
-          //error response
+         return next(new errorResponse(`user with the ID ${id} was not found`,404)) 
       }
 
       res.status(200).json({success:true,data:user})
