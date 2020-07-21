@@ -18,9 +18,8 @@ exports.createUser = asyncHandler(async(req,res,next)=>{
 //@Route get api/user/{id}
 //@Access Public
 exports.getUser = asyncHandler(async(req,res,next)=>{
-      const {id}  =  req.params.id
-
-      const user  =  await User.findById(id)
+    
+      const user  =  await User.findById(req.params.id)
 
       if(!user){
          return next(new errorResponse(`user with the ID ${id} was not found`,404)) 
@@ -29,6 +28,15 @@ exports.getUser = asyncHandler(async(req,res,next)=>{
       res.status(200).json({success:true,data:user})
 });
 
+//@Desc gets all users
+//@Route  GET api/v1/users/
+//@Access Public
+exports.getUsers =  asyncHandler(async(req,res,next)=>{
+      const users =   await  User.find({})
+
+       res.status(200).json({success:true,length:users.length,data:users})
+
+});
 
 //Deletes a  user by id
 //@Route Delete api/v1/users/{id}
