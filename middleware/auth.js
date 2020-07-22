@@ -5,7 +5,7 @@ const  User =  require("../models/User")
 
 //add authenticaton middleware to routes
 
-exoports.protect = asyHandler(async(req,res,next)=>{
+exports.protect = asyHandler(async(req,res,next)=>{
     
     let token;
     

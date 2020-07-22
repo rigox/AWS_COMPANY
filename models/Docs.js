@@ -31,11 +31,15 @@ const docSchema =  new Schema({
 
 
 //makes sures  only the owner can delete the document
-docSchema.methods.isOwner =  async function(id){
-    if(id=== this.owner){
+docSchema.methods.isOwner =   function(id){
+    let  user =  this.owner
+    user =  user.toString()
+    if(id.toString()  === user){
          return true;
     }
-     return false;
+     else{
+          return false
+     }
 }
 
 

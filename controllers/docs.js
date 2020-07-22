@@ -48,6 +48,30 @@ exports.uploadDocument  =  asynHandler(async(req,res,next)=>{
 });
 
 
+//@Desc gets a single file information
+//@Route GEt  /api/v1/docs/{id}
+//@Access  Public
+exports.getFileInfo =  asynHandler(async(req,res,next)=>{
+    
+    const file  =  await Doc.findById(req.params.id)
+
+    if(!file){
+        return next(new errorResponse(`no file with the ID ${req.params.id} was found`,404)) 
+    }
+
+    res.status(200).json({success:true,data:file});
+});
+
+//@Desc gets all files info
+//@Route GET  /api/v1/docs
+//@Access  Public
+exports.getFiles =  asynHandler(async(req,res,next)=>{
+     const files =   await Doc.find({})
+
+     res.status(200).json({success:true,number:files.length,data:files})
+});
+
+
 //@Desc deletes a file but only the owner can delete it
 //@Route DELETE  /api/v1/docs/{id}
 //@Access  private
@@ -61,8 +85,8 @@ exports.deleteFile =  asynHandler(async(req,res,next)=>{
      }
 
   //makes sure only the owner can delete the file
-
-   const owner = await  file.isOwner(req.user.id)
+   console.log(req.user._id)
+   const owner =   file.isOwner(req.user._id)
       
    if(!owner){
     return  next(new errorResponse('you are not the owner  fo the file',401))
