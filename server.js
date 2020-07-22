@@ -3,6 +3,7 @@ const dotenv =  require("dotenv")
 const colors =  require("colors")
 const cors =  require("cors")
 const morgan  =  require('morgan')
+const cookieParser =  require("cookie-parser")
 const fileUploader =   require("express-fileupload")
 const errHandler = require("./middleware/error")
 const db =  require("./config/db")
@@ -17,8 +18,10 @@ dotenv.config({path:'./config/config.env'})
 db();
 
 
-//add file middleware to the app
+//add file middleware and cookies to the app
 app.use(fileUploader())
+app.use(cookieParser())
+
 
 //load routes 
 const users =  require("./routes/user")
