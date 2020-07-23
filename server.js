@@ -27,6 +27,8 @@ app.use(cookieParser())
 const users =  require("./routes/user")
 const docs =  require("./routes/docs")
 const auth =   require("./routes/auth")
+const task =   require("./routes/task")
+
 //setup middleware
 app.use(express.urlencoded())
 app.use(express.json())
@@ -39,6 +41,8 @@ app.use(cors())
 app.use('/api/v1/users',users);
 app.use('/api/v1/docs', docs);
 app.use('/api/v1/auth',auth)
+app.use('/api/v1/task',task)
+
 //set up error handler
 app.use(errHandler)
 
