@@ -25,6 +25,15 @@ const taskSchema = new Schema({
      }
 });
 
-
+taskSchema.methods.isAssigned =   function(id){
+     let  temp =  this.user
+     temp =  temp.toString()
+     if(id.toString()  === temp){
+          return true;
+     }
+      else{
+           return false
+      }
+ }
 
 module.exports = mongoose.model('tasks',taskSchema)
