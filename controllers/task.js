@@ -23,9 +23,10 @@ exports.createTask =   asyncHandler(async(req,res,next)=>{
          MessageBody:JSON.stringify(req.body),
          QueueUrl:process.env.SQS_URL
      }
-
+      
+     req.body.user =  req.user.id
      const task =  await  Task.create(req.body)
-
+     
      sqs.sendMessage(params,(err,data)=>{
          if(err){
               throw err
@@ -45,12 +46,15 @@ exports.completeTask  =  asyncHandler(async(req,res,next)=>{
     //look for  task 
     const sqs =  new aws.SQS()
      
-    const {RCH , user} =  req.body
+    const {RCH} =  req.body
 
     const task =   await   Task.findById(req.params.id)
+
     if(!task){
          return next(new errorResponse(`not task with the id ${req.params.id} was found`),404)
     }
+
+    const user =  task.user
   
     //check  if the person assigned is completing the task
     const isAssigned =  task.isAssigned(user)
