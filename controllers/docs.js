@@ -72,6 +72,8 @@ exports.getFiles =  asynHandler(async(req,res,next)=>{
 });
 
 
+
+
 //@Desc deletes a file but only the owner can delete it
 //@Route DELETE  /api/v1/docs/{id}
 //@Access  private
@@ -98,4 +100,12 @@ exports.deleteFile =  asynHandler(async(req,res,next)=>{
 
    res.status(200).json({success:true,data:deletedFile})
      
+});
+
+
+//@Desc  shares the file 
+//@Route GET  /api/v1/docs/{id}
+//@Access  Public
+exports.shareFile = asynHandler(async(req,res,next)=>{
+
 });
